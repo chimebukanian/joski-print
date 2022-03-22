@@ -1,2 +1,2 @@
 # joski-print
-app to handle printing services on handle
+app to handle printing services online
