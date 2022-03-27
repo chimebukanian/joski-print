@@ -1,0 +1,28 @@
+{% extends 'joskiprint/base_generic.html' %}
+{% block content %}
+<div class='orders'>
+<h1>{{user.get_username}}'s orders</h1> 
+{% if order_list %}
+    <ul>
+        {% for order in order_list %}  
+            <hr style="color:white;">
+            <a href='{% url "joskiprint:ordersuccess" order.pk %}'>
+                <li class="order-suc">
+                    <ul>
+                        <li><image alt="{{order.file.url}}" src="{{ order.file.url }}" height="60px" width="70px"></li>
+                        <li>{{ order.pages }}</li>
+                        <li>{{ order.printOptions }}</li>
+                        <li>{{ order.notes }}</li>
+                        <li>{{ order.price }}</li>
+                        <li>{{ order.userDetails }}</li>
+                        <li>{{ order.order_date }}</li>
+                    </ul>
+                </li>
+            </a>
+        {% endfor %}
+    </ul>
+{% endif %}
+<a href='{% url "joskiprint:user" %}' style="color:white;">make another order</a>
+</div>
+
+{% endblock %}

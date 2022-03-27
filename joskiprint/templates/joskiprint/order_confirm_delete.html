@@ -1,0 +1,12 @@
+{% extends 'joskiprint/base_generic.html' %}
+
+{% block content %}
+
+<h1>delete Order</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <p class='delete'>are you sure you want to delete?</p>
+    <input type="submit" value="Yes, delete.">
+</form>
+{% endblock %}

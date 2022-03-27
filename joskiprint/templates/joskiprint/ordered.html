@@ -1,0 +1,16 @@
+{% extends 'joskiprint/base_generic.html' %}
+{% block content %}
+    <h1><b>New Order Successfully placed!</b></h1>
+
+    <ul class='details'>
+        <li><image alt="{{order.file.url}}" src="{{ order.file.url }}" height="60px" width="70px"></li>
+        <li>{{ order.pages }}</li>
+        <li>{{ order.printOptions }}</li>
+        <li>{{ order.notes }}</li>
+        <li>{{ order.price }}</li>
+        <li>{{ order.userDetails }}</li>
+        <li>{{ order.order_date }}</li>
+
+        <button style="border-radius: 5px; back♠ground-color:green;"><a style="text-decoration: none;" href="{% url 'joskiprint:order-update' order.pk %}">Update</a></button>
+        <button style="border-radius: 5px; background-color:red;"><a style="text-decoration: none;" href="{% url 'joskiprint:order-delete' order.pk %}">Delete</a></button>
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    {% block title %}<title>joskisprint.com</title>{% endblock %}
+    <meta metacharset="utf-8">
+    <meta name="viewport" contains="width=device-width", initial-scale="1">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'joskiprint/css/styles.css' %}">
+    <script src="{% static 'joskiprint/js/joski.js' %}"></script>
+</head>
+
+<body onload=" formanim(); anim();">
+    
+        <header class="header">
+            <div id="mySidenav" class='sidebar-nav'>
+                <ul>
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    {% if user.is_authenticated %}   
+                        <li><a href='#'>User: {{ user.get_username }}</a></li>           
+                        <li><a href='{% url "joskiprint:successes"  %}'>view previous orders</a></li>
+                        <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+                        <li><a href="{% url 'joskiprint:usersignup' %}"> Signup</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+                <span class='open' onclick="openNav()">&#9776;</span>
+
+                <h1 class='welcome'>Joski's print</h1>
+            
+                {% block sidebar %}
+                    <ul class="sidebar_nav">
+                        <li><a href="{% url 'joskiprint:index' %}">Home</a></li>
+                        <li><a href="">Services</a></li>
+                        <li><a href="{% url 'joskiprint:about' %}">About</a></li>
+
+                    </ul>
+                {% endblock %}
+        </header>
+
+        <main class='content'>
+            {% block content %}{% endblock %}
+        </main>
+               
+        <footer><i>&copy;joskiprint services 2022.</i></footer>
+        
+</body>
+</html>
+
