@@ -19,12 +19,11 @@ def about(request):
 class userCreateview(CreateView):
     form_class=usersignupform
     template_name='joskiprint/usersignup.html'
-    success_url=reverse_lazy('joskiprint:index')
 
 
     def form_valid(self, form):
         User.objects.create_user(email=self.request.POST['email'], username=self.request.POST['username'], password=self.request.POST['password'])
-        return self.form_valid(form)
+        return redirect('joskiprint:index')
 
 
 
@@ -92,7 +91,7 @@ class printOptions(CreateView):
         if self.request.user.is_authenticated:
             return reverse('joskiprint:ordersuccess', kwargs={'pk':order.pk})
         else:
-            return reverse('joskiprint:index', kwargs={'pk':order.pk})
+            return reverse('joskiprint:index')
             
 class orderSuccessful(generic.DetailView):
     model=Order
@@ -101,6 +100,12 @@ class orderSuccessful(generic.DetailView):
 class orderSuccesses(generic.ListView):
     model=Order
     template_name="joskiprint/ordersuccess.html"   
+
+    def get(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect('joskiprint:index')
+
+        return super().get(*args, **kwargs)
 
     def get_queryset(self):
         return Order.objects.filter(userDetails__email=self.request.user.email).order_by('-order_date')
