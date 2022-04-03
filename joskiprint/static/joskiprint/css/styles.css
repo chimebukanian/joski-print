@@ -93,7 +93,21 @@ a{
     text-decoration:none;
 
 }
+.placed{
+    z-index: 1;
+    position: absolute;
+    top:0%;
+    color: white;
+    font-size: small;
+    
+}
 
+.details{
+    position: absolute;
+    top:10%;
+    color: white;
+
+}
 .order{
     margin-left: 24px;
 }
@@ -166,11 +180,6 @@ form{
     transform:translate(-50%, -50%);
     color: white;
     
-}
-
-.details{
-    
-    color: white;
 }
 
 footer{

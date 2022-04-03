@@ -97,6 +97,10 @@ class orderSuccessful(generic.DetailView):
     model=Order
     template_name="joskiprint/ordered.html"
 
+    def get_context_data(self, **kwargs):
+        data=super().get_context_data(**kwargs)
+        data['placed']='New Order Successfully placed!'
+        return data
 class orderSuccesses(generic.ListView):
     model=Order
     template_name="joskiprint/ordersuccess.html"   

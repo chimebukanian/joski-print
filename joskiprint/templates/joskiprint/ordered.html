@@ -1,16 +1,19 @@
 {% extends 'joskiprint/base_generic.html' %}
 {% block content %}
-    <h1><b>New Order Successfully placed!</b></h1>
-
+    {%if placed %}
+    <h1><b class='placed'>{{placed}}</b></h1>
+    {%endif%}
     <ul class='details'>
         <li><image alt="{{order.file.url}}" src="{{ order.file.url }}" height="60px" width="70px"></li>
-        <li>{{ order.pages }}</li>
-        <li>{{ order.printOptions }}</li>
-        <li>{{ order.notes }}</li>
-        <li>{{ order.price }}</li>
-        <li>{{ order.userDetails }}</li>
-        <li>{{ order.order_date }}</li>
-
+        <li>No. of pages: {{ order.pages }}</li>
+        <li>Print_options: {{ order.printOptions }}</li>
+        <li>Additional notes: {{ order.notes }}</li>
+        <li>price: {{ order.price }}</li>
+        <li>User details:{{ order.userDetails }}</li>
+        <li>Dates and time of order: {{ order.order_date }}</li>
+        <li>status: {{order.get_status_display}}</li>
+        <li>account details: </li>
         <button style="border-radius: 5px; back♠ground-color:green;"><a style="text-decoration: none;" href="{% url 'joskiprint:order-update' order.pk %}">Update</a></button>
         <button style="border-radius: 5px; background-color:red;"><a style="text-decoration: none;" href="{% url 'joskiprint:order-delete' order.pk %}">Delete</a></button>
+    </ul>
 {% endblock %}
