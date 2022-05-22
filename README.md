@@ -1,2 +1,2 @@
 # joski-print
-app to handle printing services online
+app to place order for printing services.
